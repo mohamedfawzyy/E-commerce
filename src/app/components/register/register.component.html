@@ -1,0 +1,51 @@
+<form (ngSubmit)="signUP()" [formGroup]="registerForm" class="w-75 mx-auto p-5 bg-body-tertiary mt-5 rounded-3">
+    <h1 class="alert alert-warning">Register form</h1>
+    <div class="mb-3">
+        <label for="name" class="form-label">name: </label>
+        <input formControlName="name" name="name" type="text" class="form-control" id="name" > 
+        <div class="alert alert-danger my-2" *ngIf="registerForm.get('name')?.errors &&registerForm.get('name')?.touched">
+          <div *ngIf="registerForm.get('name')?.getError('required')">Name is required</div>
+          <div *ngIf="registerForm.get('name')?.getError('pattern')">Minumim 3 characters and Maxmiuim 20 characters not contain any numbers</div>
+        </div>
+      </div>
+
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email: </label>
+      <input formControlName="email" type="email" name="email" class="form-control" id="email">
+      <div class="alert alert-danger my-2" *ngIf="registerForm.get('email')?.errors &&registerForm.get('email')?.touched">
+        <div *ngIf="registerForm.get('email')?.getError('required')">Eamil is required</div>
+        <div *ngIf="registerForm.get('email')?.getError('email')">Insert valid Eamil !!</div>
+      </div>
+    
+    </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Paswword:</label>
+        <input formControlName="password" type="password" class="form-control" id="password" name="password">
+        <div class="alert alert-danger my-2" *ngIf="registerForm.get('password')?.errors &&registerForm.get('password')?.touched">
+          <div *ngIf="registerForm.get('password')?.getError('required')">password is required</div>
+          <div *ngIf="registerForm.get('password')?.getError('pattern')">password must conatain at least 6 characters (numbers , characters , _(underscore))</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="rePassword" class="form-label">rePaswword:</label>
+        <input formControlName="rePassword" type="password" class="form-control" id="rePassword" name="rePassword">
+        <div class="alert alert-danger my-2" *ngIf="registerForm.get('rePassword')?.errors &&registerForm.get('rePassword')?.touched">
+          <div *ngIf="registerForm.get('rePassword')?.getError('required')">repassword is required</div>
+          <div *ngIf="registerForm.get('rePassword')?.getError('pattern')">repassword must conatain at least 6 characters (numbers , characters , _(underscore))</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="Telephone" class="form-label">Telephone:</label>
+        <input formControlName="phone" type="text" class="form-control" id="Telephone" name="phone">
+        <div class="alert alert-danger my-2" *ngIf="registerForm.get('phone')?.errors &&registerForm.get('phone')?.touched">
+          <div *ngIf="registerForm.get('phone')?.getError('required')">phone is required</div>
+          <div *ngIf="registerForm.get('phone')?.getError('pattern')">phone must be like 01060709070</div>
+        </div>
+      </div>
+
+    <button [disabled]="registerForm.invalid" class="btn btn-main d-block ms-auto">Submit</button>
+  </form>
