@@ -32,3 +32,22 @@
 .nav-link {
     transition: unset !important;
   }
+
+.pointer{
+    cursor: pointer;
+}  
+.card{
+    transition:  box-shadow 0.5s;
+}
+.card:hover{
+    box-shadow: 0 0 10px var(--main-color);
+}
+.wishList{
+    position: absolute;
+    top:5px;
+    left: 5px;
+    right: 5px;
+}
+.ratingColor{
+   color: var(--rating-color);
+}

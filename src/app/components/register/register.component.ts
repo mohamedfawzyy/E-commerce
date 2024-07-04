@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { concatWith } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -8,8 +11,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
-  constructor(private _AuthService:AuthService){}
+  ShowLoader:boolean=false;
+  errorMessage:string="";
+  constructor(private _AuthService:AuthService,private _Router:Router){}
   //registeration form
     registerForm:FormGroup=new FormGroup({
       name: new FormControl(null, [Validators.required,Validators.pattern(/^[A-Za-z\s]{3,20}$/)]),
@@ -21,9 +25,18 @@ export class RegisterComponent {
 
   signUP(){
     if(this.registerForm.valid){
+      this.ShowLoader=true;
       this._AuthService.registerNewUser(this.registerForm.value).subscribe({
-        next:(response)=>console.log(response),
-        error:(error)=>console.log(error),
+        next:(response)=>{
+          this.ShowLoader=false;
+          if(response.message == "success"){
+              this._Router.navigate(["/signin"]);
+          }
+        },
+        error:(error:HttpErrorResponse)=>{
+          this.errorMessage=error.error.message;
+          this.ShowLoader=false;
+        },
       });
       
     }

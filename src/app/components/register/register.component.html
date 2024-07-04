@@ -1,4 +1,9 @@
-<form (ngSubmit)="signUP()" [formGroup]="registerForm" class="w-75 mx-auto p-5 bg-body-tertiary mt-5 rounded-3">
+<div class="continerRegister">
+  <div [ngStyle]="{display:ShowLoader?'flex':'none'}" class="loaderLayer">
+
+    <i class="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse fa-2xl"></i>
+  </div>
+  <form  (ngSubmit)="signUP()" [formGroup]="registerForm" class="w-75 mx-auto p-5 bg-body-tertiary mt-5 rounded-3 my-4">
     <h1 class="alert alert-warning">Register form</h1>
     <div class="mb-3">
         <label for="name" class="form-label">name: </label>
@@ -48,4 +53,7 @@
       </div>
 
     <button [disabled]="registerForm.invalid" class="btn btn-main d-block ms-auto">Submit</button>
+     <div *ngIf="this.errorMessage" class="alert alert-danger mt-2">{{this.errorMessage}}</div> 
   </form>
+</div>
+

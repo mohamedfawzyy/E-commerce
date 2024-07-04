@@ -13,9 +13,10 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { NavAuthComponent } from './components/nav-auth/nav-auth.component';
-import { BlankAuthComponent } from './components/blank-auth/blank-auth.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NavBlankComponent } from './components/nav-blank/nav-blank.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     AuthLayoutComponent,
     BlankLayoutComponent,
     NavAuthComponent,
-    BlankAuthComponent,
+    NavBlankComponent,
+    PageNotFoundComponent,
 
   ],
   imports: [
