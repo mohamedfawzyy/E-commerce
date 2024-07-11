@@ -14,4 +14,7 @@ export class ProductService {
       return this._HttpClient.get(`${this.baseURL}/api/v1/products`);
     }
 
+    getProductById(productId:string):Observable<any>{
+      return this._HttpClient.get(`${this.baseURL}/api/v1/products/${productId}`);
+    }
 }

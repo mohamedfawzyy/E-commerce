@@ -13,10 +13,15 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { NavAuthComponent } from './components/nav-auth/nav-auth.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NavBlankComponent } from './components/nav-blank/nav-blank.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { DetailesComponent } from './components/detailes/detailes.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NguCarouselModule } from '@ngu/carousel';
+import { SearchProductPipe } from './shared/pipes/search-product.pipe';
 
 
 @NgModule({
@@ -34,13 +39,19 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     NavAuthComponent,
     NavBlankComponent,
     PageNotFoundComponent,
+    DetailesComponent,
+    SearchProductPipe,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CarouselModule,
+    NguCarouselModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

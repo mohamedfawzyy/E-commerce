@@ -1,8 +1,8 @@
 <h1>All Products</h1>
-<div class="row g-4 my-3 align-items-start">
-    <div class="col-4 col-md-2" *ngFor="let product of products">
-        <div>
-            <div class="card">
+<div class="row g-4 my-3 align-items-stretch">
+    <div class="col-sm-4 col-lg-2 " *ngFor="let product of products">
+        <div class="h-100">
+            <div class="card pointer h-100" [routerLink]="['/detailes/',product._id]">
                 <div class="position-relative px-2 bg-body-tertiary">
                     <img [src]="product.imageCover" class="card-img-top w-100" [alt]="product.title">
                     <div class="wishList d-flex justify-content-between">
@@ -16,10 +16,10 @@
                 </div>
                 <div class="card-body">
                   <h5 class="card-title text-center">{{product.title.split(" ").slice(0,2).join(" ")}}</h5>
-                  <p class="card-text">{{product.description.split(" ").slice(0,4).join(" ")}}</p>
+                  <p class="card-text">{{product.description.split(" ").slice(0,2).join(" ")}}</p>
                   <span class="card-text">EGP <strong>{{product.price}} <del>{{product.price+100}}</del></strong></span>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 </div >

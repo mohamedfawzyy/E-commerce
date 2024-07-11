@@ -8,6 +8,7 @@
     --offers-color:#DE0B0B;
     --font-family:"Nunito";
     --shadow-color:rgba(254, 238, 0 , 0.7);
+    --unwished:#AAB8C2;
 }
 .activeLink{
     background-color: var(--main-color);
@@ -50,4 +51,19 @@
 }
 .ratingColor{
    color: var(--rating-color);
+}
+.iconbox{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    background-color: #F2F2F5;
+}
+.unwished{
+    color: var(--unwished);
+}
+.wished{
+    color: var(--main-color);
 }
