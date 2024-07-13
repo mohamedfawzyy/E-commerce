@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class DetailesComponent implements OnInit {
  productId:string="";
  carouselItems:string[]=[];
- product:Product={} as Product;
+ product:Product=null!;
   constructor(private _ActivatedRoute:ActivatedRoute , private _ProductService:ProductService) {
     
     

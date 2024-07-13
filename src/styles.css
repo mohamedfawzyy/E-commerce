@@ -67,3 +67,6 @@
 .wished{
     color: var(--main-color);
 }
+.cart:hover{
+    box-shadow:0 0 5px var(--rating-color) !important;
+}

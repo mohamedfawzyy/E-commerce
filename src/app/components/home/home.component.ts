@@ -1,8 +1,10 @@
+import { Product } from './../../shared/interfaces/product';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { CategoryService } from 'src/app/shared/category.service';
-import { Category, Product } from 'src/app/shared/interfaces/product';
+import { Category } from 'src/app/shared/interfaces/product';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -14,7 +16,7 @@ export class HomeComponent implements OnInit {
   serchTerm:string="";
   allCategories:Category[]=[];
   allProducts:Product[]=[];
-  constructor(private _ProductService:ProductService,private _CategoryService:CategoryService) {}
+  constructor(private _ProductService:ProductService,private _CategoryService:CategoryService , private _CartService:CartService) {}
   ngOnInit(): void {
     this._CategoryService.getAllCategories().subscribe({
       next:(data)=>this.allCategories=data.data,
@@ -27,6 +29,15 @@ export class HomeComponent implements OnInit {
       },
       error:(error:HttpErrorResponse)=>{console.log(error.error.message)}
     })
+  }
+
+  addToCart(event:any,ProductId:string){
+    event.stopPropagation();
+    this._CartService.addProductToCart(ProductId).subscribe({
+      next:(data)=>console.log(data),
+      error:(err)=>console.log(err) 
+    })
+   
   }
 
   customOptions: OwlOptions = {
@@ -62,4 +73,5 @@ customCategoeirs: OwlOptions = {
   },
   nav: true
 }
+
 }

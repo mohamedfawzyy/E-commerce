@@ -1,4 +1,4 @@
-<div class="my-5">
+<div *ngIf="this.product" class="my-5">
    
     <div class="card mb-3 w-75 mx-auto border-0 shadow-none bg-body-tertiary p-3">
         <div class="row g-0 align-items-center justify-content-center">
@@ -6,11 +6,11 @@
             <div class="row align-items-center justify-content-evenly ">
                 <div class="offset-1 col-3 d-flex flex-column justify-content-between ">
                   <ngu-carousel class="position-relative" #myCarousel [inputs]="carouselTile" [dataSource]="carouselItems" (carouselLoad)="carouselTileLoad($event)" >
-                    <button NguCarouselPrev class="leftRs" [style.opacity]="myCarousel.isFirst ? 0.5:1"><i class="fa-solid fa-arrow-up"></i></button>
+                    <button NguCarouselPrev class="leftRs" ><i class="fa-solid fa-arrow-up"></i></button>
                     <div *nguCarouselDef="let item;" class="item"  >
                       <img id="mainimg" (click)="changeImg($event,mainImg)" [src]="item" class="w-100 pointer" alt="">
                     </div>
-                    <button NguCarouselNext class="rightRs" [style.opacity]="myCarousel.isLast ? 0.5:1"><i class="fa-solid fa-arrow-down"></i></button>
+                    <button NguCarouselNext class="rightRs" ><i class="fa-solid fa-arrow-down"></i></button>
                   </ngu-carousel>
                   
                     <!-- <div class="my-2 pointer" style="width: 100px; height: 100px;" *ngFor="let src of product.images">
@@ -39,7 +39,7 @@
             <div class="card-body">
               <h5 class="card-title">{{product.title}}</h5>
               <p class="card-text">{{product.description}}</p>
-              <p class="card-text"><small class="text-muted">{{product.category?.name??"no category"}} | {{product.ratingsAverage}} <i class="fa-solid fa-star pe-2 ratingColor"></i>({{product.ratingsQuantity}}) </small></p>
+              <p class="card-text"><small class="text-muted">{{product.category.name}} | {{product.ratingsAverage}} <i class="fa-solid fa-star pe-2 ratingColor"></i>({{product.ratingsQuantity}}) </small></p>
               <p class="card-text">Price: <strong>{{product.price | currency:"EGP "}}</strong></p>
             </div>
           </div>

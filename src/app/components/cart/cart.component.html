@@ -1,1 +1,62 @@
-<p>cart works!</p>
+<div *ngIf="this.userCart" class="py-5">
+    <h1>Cart <small class="fw-light text-muted">({{this.userCart.numOfCartItems}} items)</small></h1>
+<div *ngIf="this.userCart.numOfCartItems"  class="row justify-content-start align-items-start">
+    <div class="col-md-8">
+        <div class="my-3 shadow py-3" *ngFor="let product of userCart.data.products">
+            <div class="row">
+                <div class="col-md-2">
+                    <img [src]="product.product.imageCover" class="w-100" [alt]="product.product.title">
+                </div>
+                <div class="col-md-10 ">
+                    <div class="row justify-content-between align-items-center h-100">
+                        <div class="col-md-6 d-flex flex-column justify-content-evenly align-items-start h-100 ">
+                            <p><strong>{{product.product.title}}</strong></p>
+                            <p><strong>Get it by <span class="ratingColor">Tomorrow-{{this.tommorow}}</span></strong></p>
+                            <p class="text-muted">Sold by <span class="ratingColor">noon</span></p>
+                            <button (click)="removeProduct(product.product._id)" class="btn btn-secondary"><i class="fa-regular fa-trash-can"></i> Remove</button>
+                        </div>
+                        <div class="col-md-3 h-100">
+                            <div class="d-flex align-items-start flex-column justify-content-evenly h-100">
+                                <div>
+                                    <p><strong> {{product.price | currency: " EGP "}} </strong></p>
+                                    <p><i class="fa-solid fa-truck text-primary"></i> Free Delivery</p>
+                                </div>
+                                <div>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <button (click)="updateQuantity(product.product._id,product.count-1)" class="btn btn-outline-success mx-2">-</button>
+                                        <span>{{product.count}}</span>
+                                        <button (click)="updateQuantity(product.product._id,product.count+1)" class="btn btn-outline-success mx-2">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+      
+        <div class="col-md-4 ">
+            <div class="border border-2 p-2">
+                <h3>Order Summary</h3>
+                <div class="d-flex justify-content-between">
+                    <span class="text-muted">Subtotal ({{this.userCart.numOfCartItems}} items)</span>
+                    <span>{{this.userCart.data.totalCartPrice | currency:" EGP "}}</span>
+                </div>
+                <div class="d-flex justify-content-between  border border-top-0 border-start-0 border-end-0 py-2">
+                    <span class="text-muted">Shipping Fee</span>
+                    <span class="ratingColor"><strong>FREE</strong></span>
+                </div>
+                <div class="d-flex justify-content-between  py-2">
+                    <span class="text-black"><strong>Total</strong> (Inclusive of VAT)</span>
+                    <span class=""><strong>{{this.userCart.data.totalCartPrice | currency: " EGP "}}</strong></span>
+                </div>
+                <button class="btn btn-primary w-100 my-2 rounded-0">CHECKOUT</button>
+            </div>
+        </div>
+</div>
+</div>
+
+
