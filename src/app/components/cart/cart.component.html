@@ -53,7 +53,7 @@
                     <span class="text-black"><strong>Total</strong> (Inclusive of VAT)</span>
                     <span class=""><strong>{{this.userCart.data.totalCartPrice | currency: " EGP "}}</strong></span>
                 </div>
-                <button class="btn btn-primary w-100 my-2 rounded-0">CHECKOUT</button>
+                <button [routerLink]="['/checkout',this.userCart.data._id]" class="btn btn-primary w-100 my-2 rounded-0">CHECKOUT</button>
             </div>
         </div>
 </div>

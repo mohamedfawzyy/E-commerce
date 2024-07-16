@@ -1,0 +1,19 @@
+<div class="bg-light w-75 mx-auto p-5">
+    <h1 class="h3 alert alert-primary text-center">Please insert data to complete proccess</h1>
+    <form [formGroup]="this.shippingForm" (ngSubmit)="checkout()">
+        <div class="mb-3">
+          <label for="details" class="form-label">Details</label>
+          <textarea formControlName="details" class="form-control" id="details" name="details"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="phone" class="form-label">phone</label>
+          <input formControlName="phone" type="tel" class="form-control" id="phone" name="phone">
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="city">City</label>
+            <input formControlName="city" type="text" class="form-control" id="city" name="city">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+

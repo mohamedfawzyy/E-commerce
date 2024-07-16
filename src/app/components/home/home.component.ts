@@ -2,6 +2,7 @@ import { Product } from './../../shared/interfaces/product';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { ToastrService } from 'ngx-toastr';
 import { CategoryService } from 'src/app/shared/category.service';
 import { Category } from 'src/app/shared/interfaces/product';
 import { CartService } from 'src/app/shared/services/cart.service';
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   serchTerm:string="";
   allCategories:Category[]=[];
   allProducts:Product[]=[];
-  constructor(private _ProductService:ProductService,private _CategoryService:CategoryService , private _CartService:CartService) {}
+  constructor(private _ProductService:ProductService,private _CategoryService:CategoryService , private _CartService:CartService,private _ToastrService:ToastrService) {}
   ngOnInit(): void {
     this._CategoryService.getAllCategories().subscribe({
       next:(data)=>this.allCategories=data.data,
@@ -34,7 +35,9 @@ export class HomeComponent implements OnInit {
   addToCart(event:any,ProductId:string){
     event.stopPropagation();
     this._CartService.addProductToCart(ProductId).subscribe({
-      next:(data)=>console.log(data),
+      next:(data)=>{
+          this._ToastrService.success(data.message);
+      },
       error:(err)=>console.log(err) 
     })
    

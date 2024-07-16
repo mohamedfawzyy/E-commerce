@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { cart } from 'src/app/shared/interfaces/cart';
 import { CartService } from 'src/app/shared/services/cart.service';
 
@@ -11,7 +12,7 @@ export class CartComponent implements OnInit{
   userCart:cart=null!;
   currentdate:Date=new Date();
   tommorow:any=new Date(this.currentdate.setDate(this.currentdate.getDate()+1)).toLocaleDateString();
-  constructor(private _CartService:CartService) { }
+  constructor(private _CartService:CartService,private _ToastrService:ToastrService) { }
   ngOnInit(): void {
         this._CartService.getCustomerCart().subscribe({
           next:(data)=>this.userCart=data
@@ -35,7 +36,7 @@ export class CartComponent implements OnInit{
     if(count>0){
       this._CartService.updateCartQuantity(productId,count).subscribe({
         next:(data)=>{this.userCart=data
-        
+        this._ToastrService.success(data.status)
         },
         error:(err)=>console.log(err)
         

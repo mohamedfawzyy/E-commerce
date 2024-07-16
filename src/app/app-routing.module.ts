@@ -13,6 +13,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { notAuthGuard } from './shared/guards/not-auth.guard';
 import { DetailesComponent } from './components/detailes/detailes.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 
 const routes: Routes = [
   //blankLayout
@@ -24,7 +26,9 @@ const routes: Routes = [
       {path:"products",component:ProductsComponent},
       {path:"brands",component:BrandsComponent},
       {path:"categories",component:CategoriesComponent},
-      {path:"detailes/:id",component:DetailesComponent}
+      {path:"detailes/:id",component:DetailesComponent},
+      {path:"checkout/:id",component:CheckoutComponent},
+      {path:"allorders",component:AllOrdersComponent}
 
     ]
   }

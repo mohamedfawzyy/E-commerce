@@ -22,7 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NguCarouselModule } from '@ngu/carousel';
 import { SearchProductPipe } from './shared/pipes/search-product.pipe';
-
+import { ToastrModule } from 'ngx-toastr';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { SearchProductPipe } from './shared/pipes/search-product.pipe';
     PageNotFoundComponent,
     DetailesComponent,
     SearchProductPipe,
+    CheckoutComponent,
+    AllOrdersComponent,
 
   ],
   imports: [
@@ -51,7 +55,8 @@ import { SearchProductPipe } from './shared/pipes/search-product.pipe';
     BrowserAnimationsModule,
     CarouselModule,
     NguCarouselModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
