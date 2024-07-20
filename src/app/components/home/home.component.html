@@ -38,14 +38,14 @@
  </div>
 <!-- products -->
 <div class="row g-4 my-3 align-items-stretch">
-    <div class="col-sm-4 col-lg-2 " *ngFor="let product of (allProducts.slice(0,24) | searchProduct:serchTerm)">
+    <div class="col-sm-4 col-lg-2 " *ngFor="let product of (allProducts.slice(0,24) | searchProduct:serchTerm)|isWished:this.wishedlistProducts">
         <div class="h-100">
             <div class="card pointer h-100" [routerLink]="['/detailes/',product._id]">
                 <div class="position-relative px-2 bg-body-tertiary">
                     <img [src]="product.imageCover" class="card-img-top w-100" [alt]="product.title">
                     <div class="wishList d-flex justify-content-between">
                         <span class="rounded rounded-pill shadow bg-secondary py-1 px-3 text-white">Best Seller</span>
-                        <span class=" bg-white p-1  shadow rounded-1 text-muted pointer"><i class="fa-regular fa-heart"></i></span>
+                        <span (click)="addOrRemoveFavs($event,product._id,product.isWished)"  class="heart bg-white p-1 shadow rounded-1 text-muted pointer"><i [ngStyle]="{color:product.isWished?'blue':''}" class="fa-solid fa-heart"></i></span>
                     </div>
                     <div class=" d-flex justify-content-between align-items-center gx-2">
                         <span class="rounded rounded-pill bg-white shadow p-1 text-muted px-3">{{product.ratingsAverage}}<i class="fa-solid fa-star pe-2 ratingColor"></i> ({{product.ratingsQuantity}})</span>

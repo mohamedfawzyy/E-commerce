@@ -1,7 +1,9 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit ,ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NguCarousel, NguCarouselConfig } from '@ngu/carousel';
 import { Product } from 'src/app/shared/interfaces/product';
+import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -13,7 +15,7 @@ export class DetailesComponent implements OnInit {
  productId:string="";
  carouselItems:string[]=[];
  product:Product=null!;
-  constructor(private _ActivatedRoute:ActivatedRoute , private _ProductService:ProductService) {
+  constructor(private _ActivatedRoute:ActivatedRoute , private _ProductService:ProductService,private _CartService:CartService,private _ToastrService:ToastrService) {
     
     
   }
@@ -56,5 +58,14 @@ export class DetailesComponent implements OnInit {
 
   carouselTileLoad(data:any) {
     this.carouselItems = [...this.product.images ];
+  }
+
+  addToCart(productId:string){
+        this._CartService.addProductToCart(productId).subscribe({
+          next:(data)=>{
+              this._ToastrService.success(data.message);
+          },
+          error:(err)=>console.log(err) 
+        })
   }
 }

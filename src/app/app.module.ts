@@ -25,6 +25,8 @@ import { SearchProductPipe } from './shared/pipes/search-product.pipe';
 import { ToastrModule } from 'ngx-toastr';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
+import { WishedListComponent } from './components/wished-list/wished-list.component';
+import { IsWishedPipe } from './shared/pipes/is-wished.pipe';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { AllOrdersComponent } from './components/all-orders/all-orders.component
     SearchProductPipe,
     CheckoutComponent,
     AllOrdersComponent,
+    WishedListComponent,
+    IsWishedPipe,
 
   ],
   imports: [

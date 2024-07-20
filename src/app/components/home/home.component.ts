@@ -7,6 +7,7 @@ import { CategoryService } from 'src/app/shared/category.service';
 import { Category } from 'src/app/shared/interfaces/product';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { WishedListService } from 'src/app/shared/services/wished-list.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
   serchTerm:string="";
   allCategories:Category[]=[];
   allProducts:Product[]=[];
-  constructor(private _ProductService:ProductService,private _CategoryService:CategoryService , private _CartService:CartService,private _ToastrService:ToastrService) {}
+  wishedlistProducts:Product[]=[];
+  constructor(private _ProductService:ProductService,private _CategoryService:CategoryService , private _CartService:CartService,private _ToastrService:ToastrService, private _WishedListService:WishedListService) {}
   ngOnInit(): void {
     this._CategoryService.getAllCategories().subscribe({
       next:(data)=>this.allCategories=data.data,
@@ -29,9 +31,14 @@ export class HomeComponent implements OnInit {
           this.allProducts=data.data;
       },
       error:(error:HttpErrorResponse)=>{console.log(error.error.message)}
-    })
+    });
+    this._WishedListService.getAllUserWishlist().subscribe({
+      next:(data)=>{this.wishedlistProducts=data.data
+      },
+      error:(err)=>console.log(err)
+    });
   }
-
+  
   addToCart(event:any,ProductId:string){
     event.stopPropagation();
     this._CartService.addProductToCart(ProductId).subscribe({
@@ -43,6 +50,54 @@ export class HomeComponent implements OnInit {
    
   }
 
+  addOrRemoveFavs(event:any,productId:string,isWished:boolean){
+    console.log(isWished);
+    
+      event.stopPropagation();
+      if(!isWished){
+        if  (event.target != null ){
+          event.target.style.color="blue";
+        }
+
+        this._WishedListService.addToWishedList(productId).subscribe({
+          next:(data)=>{
+            if(data.status == "success"){
+              this._ToastrService.success("product added to your wish list","Favourites",);
+              this.changeWishlist();
+            }
+            
+          }
+        })
+      }else{
+        if  (event.target != null ){
+          event.target.style.color="#595C5F";
+        }
+    
+       
+        this._WishedListService.removeFromWishlist(productId).subscribe({
+          next:(data)=>{
+            if(data.status == "success"){
+              this._ToastrService.success("product removed from your wish list","Favourites");
+              this.changeWishlist();
+            }
+            
+          }
+        })
+      }
+    
+      
+  }
+ changeWishlist(){
+  this._WishedListService.getAllUserWishlist().subscribe({
+    next:(data)=>{
+      console.log(data);
+      this.wishedlistProducts=data.data;
+      console.log(this.wishedlistProducts);
+      
+    },
+    error:(err)=>console.log(err)
+  });
+ }
   customOptions: OwlOptions = {
     autoplay:true,
     

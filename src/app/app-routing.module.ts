@@ -15,6 +15,7 @@ import { notAuthGuard } from './shared/guards/not-auth.guard';
 import { DetailesComponent } from './components/detailes/detailes.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
+import { WishedListComponent } from './components/wished-list/wished-list.component';
 
 const routes: Routes = [
   //blankLayout
@@ -28,7 +29,8 @@ const routes: Routes = [
       {path:"categories",component:CategoriesComponent},
       {path:"detailes/:id",component:DetailesComponent},
       {path:"checkout/:id",component:CheckoutComponent},
-      {path:"allorders",component:AllOrdersComponent}
+      {path:"allorders",component:AllOrdersComponent},
+      {path:"wishedlist",component:WishedListComponent}
 
     ]
   }
