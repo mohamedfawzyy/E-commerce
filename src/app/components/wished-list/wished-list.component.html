@@ -3,7 +3,7 @@
 <div class="row g-4 my-3 align-items-stretch w-75 mx-auto">
     <div class="col-sm-6 col-md-4 " *ngFor="let product of this.wisedList.data">
         <div class="h-100">
-            <div class="card pointer h-100" [routerLink]="['/detailes/',product._id]">
+            <div class="card pointer h-100" [routerLink]="['/detailes/',product._id,true]">
                 <div class="position-relative px-2 bg-body-tertiary">
                     <owl-carousel-o [options]="customOptions">
                         <ng-container *ngFor="let slide of product.images">

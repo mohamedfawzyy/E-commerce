@@ -1,0 +1,8 @@
+<div class="">
+    <form [formGroup]="resetCode" (ngSubmit)="submitResetCode()" class="w-50 mx-auto mt-4 p-4 bg-light">
+        <h4 class="alert alert-info mx-auto">please check your mail</h4>
+        <label for="resetcode" class="form-label">Code</label>
+        <input type="text" formControlName="resetCode" class="form-control">
+        <button type="submit" class="btn btn-success d-block ms-auto mt-3">Submit</button>
+    </form>
+</div>

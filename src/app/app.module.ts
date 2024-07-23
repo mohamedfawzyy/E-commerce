@@ -14,7 +14,7 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { NavAuthComponent } from './components/nav-auth/nav-auth.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NavBlankComponent } from './components/nav-blank/nav-blank.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { DetailesComponent } from './components/detailes/detailes.component';
@@ -27,6 +27,9 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 import { WishedListComponent } from './components/wished-list/wished-list.component';
 import { IsWishedPipe } from './shared/pipes/is-wished.pipe';
+import { CategoryDetailesComponent } from './components/category-detailes/category-detailes.component';
+import { BrandDetailesComponent } from './components/brand-detailes/brand-detailes.component';
+import { MyHttpInterceptor } from './shared/interceptors/my-http.interceptor';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,9 @@ import { IsWishedPipe } from './shared/pipes/is-wished.pipe';
     AllOrdersComponent,
     WishedListComponent,
     IsWishedPipe,
+    CategoryDetailesComponent,
+    BrandDetailesComponent,
+
 
   ],
   imports: [
@@ -62,7 +68,9 @@ import { IsWishedPipe } from './shared/pipes/is-wished.pipe';
     FormsModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:MyHttpInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,7 +2,7 @@
 <div class="row g-4 my-3 align-items-stretch">
     <div class="col-sm-4 col-lg-2 " *ngFor="let product of products|isWished:this.wishedlistProducts">
         <div class="h-100">
-            <div class="card pointer h-100" [routerLink]="['/detailes/',product._id]">
+            <div class="card pointer h-100" [routerLink]="['/detailes/',product._id,product.isWished]">
                 <div class="position-relative px-2 bg-body-tertiary">
                     <img [src]="product.imageCover" class="card-img-top w-100" [alt]="product.title">
                     <div class="wishList d-flex justify-content-between">

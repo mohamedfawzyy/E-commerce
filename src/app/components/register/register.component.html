@@ -39,7 +39,7 @@
         <input formControlName="rePassword" type="password" class="form-control" id="rePassword" name="rePassword">
         <div class="alert alert-danger my-2" *ngIf="registerForm.get('rePassword')?.errors &&registerForm.get('rePassword')?.touched">
           <div *ngIf="registerForm.get('rePassword')?.getError('required')">repassword is required</div>
-          <div *ngIf="registerForm.get('rePassword')?.getError('pattern')">repassword must conatain at least 6 characters (numbers , characters , _(underscore))</div>
+          <div *ngIf="registerForm.get('rePassword')?.getError('mismatch')">repassword desn't match password</div>
         </div>
       </div>
 

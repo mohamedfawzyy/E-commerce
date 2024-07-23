@@ -14,4 +14,8 @@ export class CategoryService {
   getAllCategories():Observable<any>{
     return this._HttpClient.get(`${this.baseURL}/api/v1/categories`);
   }
+
+  getCategoryById(CategoryId:string):Observable<any>{
+    return this._HttpClient.get(`${this.baseURL}/api/v1/categories/${CategoryId}`);
+  }
 }

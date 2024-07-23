@@ -19,6 +19,7 @@
       <button [disabled]="loginForm.invalid" type="submit" (click)="loginUser()" class="btn btn-main d-block ms-auto">
         <i *ngIf="isspinnner" class="fa-solid fa-spinner fa-spin-pulse fa-spin-reverse fa-1xl mx-2"></i>
         Sign in</button>
+        <a class="ms-auto text-success" routerLink="/setting/forgetPassword">forget Password !!</a>
         <div *ngIf="errorSignin" class="alert alert-danger mt-3">{{errorSignin}}</div>
     </div>
   </form>

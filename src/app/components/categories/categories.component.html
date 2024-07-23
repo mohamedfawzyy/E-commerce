@@ -1,1 +1,11 @@
-<p>categories works!</p>
+<div class="container py-5">
+    <h1 class="text-center my-3">Categories</h1>
+    <div class="row g-4">
+        <div class="col-md-3 rounded-2 pointer" *ngFor="let category of this.allCategories" [routerLink]="['/category',category._id]">
+            <div class="shadow category">
+                <img [src]="category.image" class="w-100 rounded-2" [alt]="category.slug">
+                <h3 class="text-center py-2">{{category.name}}</h3>
+            </div>
+        </div>
+    </div>
+</div>

@@ -26,7 +26,7 @@
                   </div>
                   <div class="col-2">
                     <div class="iconbox pointer">
-                      <i class="unwished fa-solid fa-heart"></i>
+                      <i (click)="addOrRemoveFavs($event,product._id,product.isWished)" [ngStyle]="{color:product.isWished?'blue':''}" class="unwished fa-solid fa-heart"></i>
                     </div>
                     
                   </div>

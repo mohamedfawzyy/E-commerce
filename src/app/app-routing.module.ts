@@ -16,6 +16,8 @@ import { DetailesComponent } from './components/detailes/detailes.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 import { WishedListComponent } from './components/wished-list/wished-list.component';
+import { CategoryDetailesComponent } from './components/category-detailes/category-detailes.component';
+import { BrandDetailesComponent } from './components/brand-detailes/brand-detailes.component';
 
 const routes: Routes = [
   //blankLayout
@@ -27,10 +29,12 @@ const routes: Routes = [
       {path:"products",component:ProductsComponent},
       {path:"brands",component:BrandsComponent},
       {path:"categories",component:CategoriesComponent},
-      {path:"detailes/:id",component:DetailesComponent},
+      {path:"detailes/:id/:iswished",component:DetailesComponent},
       {path:"checkout/:id",component:CheckoutComponent},
       {path:"allorders",component:AllOrdersComponent},
-      {path:"wishedlist",component:WishedListComponent}
+      {path:"wishedlist",component:WishedListComponent},
+      {path:"category/:id",component:CategoryDetailesComponent},
+      {path:"brand/:id",component:BrandDetailesComponent},
 
     ]
   }
@@ -40,7 +44,9 @@ const routes: Routes = [
     path:"",canActivate:[notAuthGuard],component:AuthLayoutComponent,children:[
       {path:"",redirectTo:"register",pathMatch:"full"},
       {path:"register",component:RegisterComponent},
-      {path:"signin",component:SigninComponent}
+      {path:"signin",component:SigninComponent},
+      {path:"setting",loadChildren:()=>import('./setting/setting.module').then(m=>(m.SettingModule))}
+
     ]
   },
   //page not found

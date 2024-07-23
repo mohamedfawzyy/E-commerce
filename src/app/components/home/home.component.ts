@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
   }
 
   addOrRemoveFavs(event:any,productId:string,isWished:boolean){
-    console.log(isWished);
+
     
       event.stopPropagation();
       if(!isWished){
@@ -90,9 +90,9 @@ export class HomeComponent implements OnInit {
  changeWishlist(){
   this._WishedListService.getAllUserWishlist().subscribe({
     next:(data)=>{
-      console.log(data);
+  
       this.wishedlistProducts=data.data;
-      console.log(this.wishedlistProducts);
+  
       
     },
     error:(err)=>console.log(err)

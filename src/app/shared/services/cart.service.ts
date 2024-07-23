@@ -8,43 +8,31 @@ import { Observable } from 'rxjs';
 })
 export class CartService {
   baseURL:string=`https://ecommerce.routemisr.com`;
-  headers:any={
-    token:localStorage.getItem('freshToken')??""
-  }
+ 
   constructor(private _HttpClient:HttpClient) { }
 
   addProductToCart(productId:string):Observable<any>{
     return  this._HttpClient.post(`${this.baseURL}/api/v1/cart?`,{
           "productId": productId
-        },{
-           headers:this.headers
         });
   }
 
   getCustomerCart():Observable<any>{
-    return this._HttpClient.get(`${this.baseURL}/api/v1/cart`,{
-      headers:this.headers
-    })
+    return this._HttpClient.get(`${this.baseURL}/api/v1/cart`)
   }
 
   removeSpecificProduct(productId:string):Observable<any>{
-  return  this._HttpClient.delete(`${this.baseURL}/api/v1/cart/${productId}`,{
-    headers:this.headers
-  });
+  return  this._HttpClient.delete(`${this.baseURL}/api/v1/cart/${productId}`);
   }
 
   updateCartQuantity(productId:string,count:number):Observable<any>{
     return this._HttpClient.put(`${this.baseURL}/api/v1/cart/${productId}`,{
       "count":`${count}`
-    },{
-      headers:this.headers
     });
   }
 
   checkOutCart(cartId:string,usertData:object):Observable<any>{
-   return this._HttpClient.post(`${this.baseURL}/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200`,usertData,{
-      headers:this.headers
-    });
+   return this._HttpClient.post(`${this.baseURL}/api/v1/orders/checkout-session/${cartId}?url=http://localhost:4200`,usertData);
   }
 
   getUserOrders():Observable<any>{

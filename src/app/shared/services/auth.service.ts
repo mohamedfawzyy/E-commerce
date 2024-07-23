@@ -22,4 +22,17 @@ export class AuthService {
     localStorage.removeItem("freshToken");
     this._Router.navigate(["/signin"]);
   }
+
+  forgetPassword(userEmail:object):Observable<any>{
+    return this._HttpClient.post(`${this.BaseUrl}/api/v1/auth/forgotPasswords`,userEmail);
+  }
+
+  resetCode(ResetCode:object):Observable<any>{
+    return this._HttpClient.post(`${this.BaseUrl}/api/v1/auth/verifyResetCode`,ResetCode);
+  }
+
+  resetPassword(resetPassword:object):Observable<any>{
+    return this._HttpClient.put(`${this.BaseUrl}/api/v1/auth/resetPassword`,resetPassword);
+  }
+
 }

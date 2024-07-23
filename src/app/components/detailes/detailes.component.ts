@@ -1,3 +1,4 @@
+import { WishedListService } from './../../shared/services/wished-list.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit ,ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -13,19 +14,29 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class DetailesComponent implements OnInit {
  productId:string="";
+ isWished:boolean=false;
  carouselItems:string[]=[];
  product:Product=null!;
-  constructor(private _ActivatedRoute:ActivatedRoute , private _ProductService:ProductService,private _CartService:CartService,private _ToastrService:ToastrService) {
+  constructor(private _ActivatedRoute:ActivatedRoute , private _ProductService:ProductService,private _CartService:CartService,private _ToastrService:ToastrService,private  _WishedListService:WishedListService) {
     
     
   }
   ngOnInit(): void {
         this._ActivatedRoute.paramMap.subscribe({
-          next:(params)=>this.productId=params.get("id")??"",
+          next:(params)=>{
+            this.productId=params.get("id")??"";
+            this.isWished= params.get("iswished")=="true"?true:false;
+          
+            
+          },
           error:(error)=>console.log(error)
         })
        this._ProductService.getProductById(this.productId).subscribe({
-        next:(data)=>{this.product=data.data
+        next:(data)=>{
+          this.product=data.data;
+          this.product.isWished=this.isWished;
+          console.log(this.product.isWished);
+          
           this.carouselTileLoad(this.product.images);
         },
         error:(error)=>console.log(error)
@@ -67,5 +78,42 @@ export class DetailesComponent implements OnInit {
           },
           error:(err)=>console.log(err) 
         })
+  }
+  addOrRemoveFavs(event:any,productId:string,isWished:boolean){
+    console.log(isWished);
+    
+    
+      if(!isWished){
+        if  (event.target != null ){
+          event.target.style.color="blue";
+        }
+
+        this._WishedListService.addToWishedList(productId).subscribe({
+          next:(data)=>{
+            if(data.status == "success"){
+              this._ToastrService.success("product added to your wish list","Favourites",);
+              this.product.isWished=true;
+            }
+            
+          }
+        })
+      }else{
+        if  (event.target != null ){
+          event.target.style.color="#595C5F";
+        }
+    
+       
+        this._WishedListService.removeFromWishlist(productId).subscribe({
+          next:(data)=>{
+            if(data.status == "success"){
+              this._ToastrService.success("product removed from your wish list","Favourites");
+              this.product.isWished=false;
+            }
+            
+          }
+        })
+      }
+    
+      
   }
 }
