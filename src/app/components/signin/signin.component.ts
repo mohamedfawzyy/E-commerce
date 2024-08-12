@@ -1,3 +1,4 @@
+import { jwtDecode } from 'jwt-decode';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -27,6 +28,7 @@ export class SigninComponent {
       this._AuthService.loginUser(this.loginForm.value).subscribe({
         next:(data)=>{
           localStorage.setItem("freshToken",data.token);
+         
          
           this._Router.navigate(["/home"]);
         },

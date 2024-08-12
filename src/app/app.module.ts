@@ -30,7 +30,12 @@ import { IsWishedPipe } from './shared/pipes/is-wished.pipe';
 import { CategoryDetailesComponent } from './components/category-detailes/category-detailes.component';
 import { BrandDetailesComponent } from './components/brand-detailes/brand-detailes.component';
 import { MyHttpInterceptor } from './shared/interceptors/my-http.interceptor';
-
+import { FooterComponent } from './components/footer/footer.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { LoadingPageInterceptor } from './shared/interceptors/loading-page.interceptor';
+import { ProductsPerCategoriesComponent } from './components/products-per-categories/products-per-categories.component';
+import { ProductBrandComponent } from './components/product-brand/product-brand.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +59,9 @@ import { MyHttpInterceptor } from './shared/interceptors/my-http.interceptor';
     IsWishedPipe,
     CategoryDetailesComponent,
     BrandDetailesComponent,
+    FooterComponent,
+    ProductsPerCategoriesComponent,
+    ProductBrandComponent,
 
 
   ],
@@ -66,10 +74,13 @@ import { MyHttpInterceptor } from './shared/interceptors/my-http.interceptor';
     CarouselModule,
     NguCarouselModule,
     FormsModule,
-    ToastrModule.forRoot()
+    NgxPaginationModule,
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
-    {provide:HTTP_INTERCEPTORS,useClass:MyHttpInterceptor,multi:true}
+    {provide:HTTP_INTERCEPTORS,useClass:MyHttpInterceptor,multi:true},
+    {provide:HTTP_INTERCEPTORS,useClass:LoadingPageInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })

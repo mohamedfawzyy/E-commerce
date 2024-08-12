@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/interfaces/product';
 import { ProductService } from 'src/app/shared/services/product.service';
-import { HomeComponent } from '../home/home.component';
 import { CartService } from 'src/app/shared/services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishedListService } from 'src/app/shared/services/wished-list.service';
@@ -15,12 +14,17 @@ import { WishedListService } from 'src/app/shared/services/wished-list.service';
 export class ProductsComponent implements OnInit {
   products:Product[]=[];
   wishedlistProducts:Product[]=[];
+  itemsPerPage:number=15;
+  currentPage:number=1;
+  Total!:number;
   constructor(private _ProductService:ProductService ,private _CartService:CartService,private _ToastrService:ToastrService, private _WishedListService:WishedListService){}
   ngOnInit(): void {
   
-    this._ProductService.getProducts().subscribe({
+    this._ProductService.getProducts(this.itemsPerPage,this.currentPage).subscribe({
       next:(data)=>{
           this.products=data.data;
+          this.Total=data.results,
+          this.currentPage=data.metadata.currentPage
       },
       error:(error:HttpErrorResponse)=>{console.log(error.error.message)}
     });
@@ -36,6 +40,7 @@ export class ProductsComponent implements OnInit {
     this._CartService.addProductToCart(ProductId).subscribe({
       next:(data)=>{
           this._ToastrService.success(data.message);
+          this._CartService.cartNumber=data.numOfCartItems
       },
       error:(err)=>console.log(err) 
     })
@@ -55,6 +60,9 @@ export class ProductsComponent implements OnInit {
             if(data.status == "success"){
               this._ToastrService.success("product added to your wish list","Favourites",);
               this.changeWishlist();
+              this._WishedListService.WishlistNumber.next(data.data.length);
+
+
             }
             
           }
@@ -70,6 +78,9 @@ export class ProductsComponent implements OnInit {
             if(data.status == "success"){
               this._ToastrService.success("product removed from your wish list","Favourites");
               this.changeWishlist();
+              this._WishedListService.WishlistNumber.next(data.data.length);
+
+
             }
             
           }
@@ -89,5 +100,16 @@ export class ProductsComponent implements OnInit {
     error:(err)=>console.log(err)
   });
  }
-
+ 
+ pageChanged(ele:any){
+  this._ProductService.getProducts(this.itemsPerPage ,ele).subscribe({
+    next:(data)=>{
+        this.products=data.data;
+        this.Total=data.results,
+        this.currentPage=data.metadata.currentPage
+    },
+    error:(error:HttpErrorResponse)=>{console.log(error.error.message)}
+  });
+    
+ }
 }

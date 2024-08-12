@@ -13,7 +13,7 @@
 .activeLink{
     font-weight: bold;
     border-radius: 5px;
-    padding: 5px;
+    background-color: var(--main-color);
 }
 
 .btn-main{
@@ -74,3 +74,20 @@
 .heart:hover{
     box-shadow: 0 0 5px var(--rating-color) !important;
 }   
+::-webkit-scrollbar{
+    background-color: var(--unwished);
+    width: 12px;
+}
+::-webkit-scrollbar-thumb{
+    background-color: var(--main-color);
+}
+.roundedConatiner{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px  gray;
+}

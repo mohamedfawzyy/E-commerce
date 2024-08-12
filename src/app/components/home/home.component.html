@@ -23,17 +23,18 @@
 <!-- categories carousel -->
 <div class="caetegoriesCarousal px-2">
     <owl-carousel-o [options]="customCategoeirs">
-
         <ng-container *ngFor="let category of allCategories">
-          <ng-template carouselSlide >
-            <img [src]="category.image" style="height: 150px;" class="rounded-circle" [alt]="category.name" [title]="category.name">
-            <h3 class="h5 text-center fw-bold">{{category.name}}</h3>
-          </ng-template>
+            <ng-template carouselSlide >
+              <div class="pointer" [routerLink]="['/ProductCategories',category._id]">
+                <img [src]="category.image" style="height: 150px;" class="rounded-circle" [alt]="category.name" [title]="category.name">
+                <h3 class="h5 text-center fw-bold">{{category.name}}</h3>
+              </div>
+            </ng-template>
         </ng-container>
       </owl-carousel-o>
 </div>
 <!-- search products-->
- <div class="search">
+ <div class="search my-2">
   <input type="search"  [(ngModel)]="serchTerm" name="search" class="form-control w-50 mx-auto" id="search" placeholder="Search Product  ...">
  </div>
 <!-- products -->

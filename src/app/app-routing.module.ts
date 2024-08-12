@@ -1,3 +1,4 @@
+import { ProductBrandComponent } from './components/product-brand/product-brand.component';
 import { authGuard } from './shared/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,6 +19,7 @@ import { AllOrdersComponent } from './components/all-orders/all-orders.component
 import { WishedListComponent } from './components/wished-list/wished-list.component';
 import { CategoryDetailesComponent } from './components/category-detailes/category-detailes.component';
 import { BrandDetailesComponent } from './components/brand-detailes/brand-detailes.component';
+import { ProductsPerCategoriesComponent } from './components/products-per-categories/products-per-categories.component';
 
 const routes: Routes = [
   //blankLayout
@@ -35,6 +37,8 @@ const routes: Routes = [
       {path:"wishedlist",component:WishedListComponent},
       {path:"category/:id",component:CategoryDetailesComponent},
       {path:"brand/:id",component:BrandDetailesComponent},
+      {path:"ProductCategories/:id",component:ProductsPerCategoriesComponent},
+      {path:"ProductBrand/:id",component:ProductBrandComponent}
 
     ]
   }

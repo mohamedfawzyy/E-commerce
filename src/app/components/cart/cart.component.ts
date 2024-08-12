@@ -22,7 +22,7 @@ export class CartComponent implements OnInit{
     console.log(ProductId);
     this._CartService.removeSpecificProduct(ProductId).subscribe({
       next:(data)=>{this.userCart=data
-        console.log(data);
+        this._CartService.cartNumber.next(data.numOfCartItems)
         
       },
       error:(err)=>console.log(err),

@@ -1,0 +1,34 @@
+<div *ngIf="this.productsCategory.length > 0;else noProducts">
+    <div class="row g-4 my-3 align-items-stretch">
+        <div class="col-sm-4 col-lg-2 " *ngFor="let product of (productsCategory)|isWished:this.wishedlistProducts">
+            <div class="h-100">
+                <div class="card pointer h-100" [routerLink]="['/detailes/',product._id,product.isWished]">
+                    <div class="position-relative px-2 bg-body-tertiary">
+                        <img [src]="product.imageCover" class="card-img-top w-100" [alt]="product.title">
+                        <div class="wishList d-flex justify-content-between">
+                            <span class="rounded rounded-pill shadow bg-secondary py-1 px-3 text-white">Best Seller</span>
+                            <span (click)="addOrRemoveFavs($event,product._id,product.isWished)"  class="heart bg-white p-1 shadow rounded-1 text-muted pointer"><i [ngStyle]="{color:product.isWished?'blue':''}" class="fa-solid fa-heart"></i></span>
+                        </div>
+                        <div class=" d-flex justify-content-between align-items-center gx-2">
+                            <span class="rounded rounded-pill bg-white shadow p-1 text-muted px-3">{{product.ratingsAverage}}<i class="fa-solid fa-star pe-2 ratingColor"></i> ({{product.ratingsQuantity}})</span>
+                            <span (click)="addToCart($event , product._id)" class="cart bg-white p-1 shadow rounded-2  text-muted pointer"><i class="fa-solid fa-cart-plus"></i></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title text-center">{{product.title.split(" ").slice(0,2).join(" ")}}</h5>
+                      <p class="card-text">{{product.description.split(" ").slice(0,2).join(" ")}}</p>
+                      <span class="card-text">EGP <strong>{{product.price}} <del>{{product.price+100}}</del></strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div >
+</div>
+
+<ng-template #noProducts>
+    <div class=" w-50 mx-auto my-4 alert alert-info">
+        <p class="text-center">
+            There is No Products for this category
+        </p>
+    </div>
+</ng-template>

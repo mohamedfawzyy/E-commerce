@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   baseURL:string=`https://ecommerce.routemisr.com`;
+  cartNumber:BehaviorSubject<number>=new BehaviorSubject(0);
  
   constructor(private _HttpClient:HttpClient) { }
 

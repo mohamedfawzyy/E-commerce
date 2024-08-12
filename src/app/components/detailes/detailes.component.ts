@@ -75,6 +75,7 @@ export class DetailesComponent implements OnInit {
         this._CartService.addProductToCart(productId).subscribe({
           next:(data)=>{
               this._ToastrService.success(data.message);
+              this._CartService.cartNumber.next(data.numOfCartItems);
           },
           error:(err)=>console.log(err) 
         })
@@ -93,6 +94,9 @@ export class DetailesComponent implements OnInit {
             if(data.status == "success"){
               this._ToastrService.success("product added to your wish list","Favourites",);
               this.product.isWished=true;
+              this._WishedListService.WishlistNumber.next(data.data.length);
+
+
             }
             
           }
@@ -108,6 +112,9 @@ export class DetailesComponent implements OnInit {
             if(data.status == "success"){
               this._ToastrService.success("product removed from your wish list","Favourites");
               this.product.isWished=false;
+              this._WishedListService.WishlistNumber.next(data.data.length);
+
+
             }
             
           }

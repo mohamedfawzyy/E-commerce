@@ -1,6 +1,12 @@
-<h1>All Products</h1>
+<div *ngIf="products">
+
+    <h1>All Products</h1>
 <div class="row g-4 my-3 align-items-stretch">
-    <div class="col-sm-4 col-lg-2 " *ngFor="let product of products|isWished:this.wishedlistProducts">
+    <div class="col-sm-4 col-lg-2 " *ngFor="let product of products|isWished:this.wishedlistProducts 
+                                        | paginate: { id: 'pagination',
+                                        itemsPerPage: this.itemsPerPage,
+                                        currentPage: this.currentPage,
+                                        totalItems: this.Total}">
         <div class="h-100">
             <div class="card pointer h-100" [routerLink]="['/detailes/',product._id,product.isWished]">
                 <div class="position-relative px-2 bg-body-tertiary">
@@ -23,3 +29,20 @@
         </div>
     </div>
 </div >
+<div class="w-25 mx-auto">
+    <pagination-controls  id="pagination"
+                      (pageChange)="pageChanged($event)"
+                      (pageBoundsCorrection)="pageChanged($event)"
+                      [maxSize]="9"
+                      [directionLinks]="true"
+                      [autoHide]="true"
+                      [responsive]="true"
+                      previousLabel="Previous"
+                      nextLabel="Next"
+                      screenReaderPaginationLabel="Pagination"
+                      screenReaderPageLabel="page"
+                      screenReaderCurrentLabel="You're on page">
+</pagination-controls>
+</div>
+
+</div>

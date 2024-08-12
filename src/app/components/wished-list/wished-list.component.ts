@@ -29,6 +29,7 @@ export class WishedListComponent implements OnInit {
     this._CartService.addProductToCart(ProductId).subscribe({
       next:(data)=>{
           this._ToastrService.success(data.message);
+          this._CartService.cartNumber.next(data.numOfCartItems)
       },
       error:(err)=>console.log(err) 
     })
